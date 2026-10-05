@@ -1,1 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @import 'tailwindcss';
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  /* font-size: 10px; */
+  font-size: 62.5%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+@theme {
+  --color-primary: #006d77;
+  --color-secondary: #d4a373;
+  --color-tertiary: #5e4700;
+
+  --color-surface: #f9f9ff;
+  --color-surface-container: #e7eeff;
+  --color-error: #ba1a1a;
+
+  --color-textPrimary: #111C2C;
+  --color-textSecondary: #6F797A;
+  --color-textTertiary: #3E494A;
+
+  --color-outline-variant: #bec8ca;
+}
+
+@utility display-large {
+  font-size: clamp(2.25rem, 1.5rem + 3vw, 3.5625rem);
+  font-weight: var(--weight-bold);
+  line-height: 1.1;
+  letter-spacing: var(--tracking-normal);
+  color: var(--color-neutral-dark);
+}
+
+/* Headline Medium: Inter / 28px / 600 */
+@utility headline-medium {
+  font-size: clamp(1.375rem, 1.125rem + 1.2vw, 1.75rem);
+  font-weight: var(--weight-semibold);
+  line-height: 1.3;
+  color: var(--color-neutral-dark);
+}
+
+/* Body Large: Inter / 18px / 400 */
+@utility body-large {
+  font-size: clamp(1rem, 0.9375rem + 0.3vw, 1.125rem);
+  font-weight: var(--weight-regular);
+  line-height: 1.6;
+  color: var(--color-neutral-mid);
+}
+
+/* Label Medium: Inter / 14px / 500 */
+@utility label-medium {
+  font-size: clamp(0.75rem, 0.65rem + 0.25vw, 0.875rem);
+  font-weight: var(--weight-medium);
+  line-height: 1.4;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+@utility shadow-soft {
+  box-shadow: 0px 8px 10px -6px #0000001a;
+}
+
+@utility shadow-elevated {
+  box-shadow: 0px 20px 25px -5px #0000001a;
+}
