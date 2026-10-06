@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { SignupComponent } from './feature/auth/signup/signup.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [],
+  imports: [SignupComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

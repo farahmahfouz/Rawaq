@@ -1,0 +1,83 @@
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+<section class="grid grid-cols-1 lg:grid-cols-2 min-h-dvh">
+    <div class="bg-primary-dark text-white flex flex-col items-center justify-center gap-6">
+        <h1 class="text-5xl font-bold tracking-display capitalize">rawaq</h1>
+        <p class="body-large max-w-109 opacity-90 text-center">Welcome to Rawaq — your structured learning
+            space. Join a community of dedicated mentors and
+            eager learners in a space designed for focus and
+            academic excellence.</p>
+        <div class="flex gap-8">
+            <span class="flex flex-col gap-3 items-center">
+                <svg icon="courses" class="text-white size-8"></svg>
+                <p class="font-semibold text-xs">Structured Courses</p>
+            </span>
+            <span class="flex flex-col gap-3 items-center">
+                <svg icon="mentors" class="text-white size-8"></svg>
+                <p class="font-semibold text-xs">Expert Mentors</p>
+            </span>
+            <span class="flex flex-col gap-3 items-center">
+                <svg icon="mentors" class="text-white size-8"></svg>
+                <p class="font-semibold text-xs">Certified Growth</p>
+            </span>
+        </div>
+    </div>
+    <div class="flex items-center justify-center py-10">
+        <app-form title="create account" description="Fill in the details below to get started.">
+            <form class="w-full max-w-125">
+                <div class="pb-10">
+                    <p class="text-textTertiary font-normal leading-6 pb-3">I am a...</p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex flex-col items-center border rounded-lg p-4 cursor-pointer"
+                            (click)="selectRole('student')" [class.bg-surface-light]="selectedRole() === 'student'"
+                            [class.border-primary-dark]="selectedRole() === 'student'"
+                            [class.bg-white]="selectedRole() !== 'student'"
+                            [class.border-light-gray]="selectedRole() !== 'student'">
+                            <svg icon="student" class="text-textTertiary size-5.5"></svg>
+                            <p class="text-textPrimary font-semibold text-xs capitalize">student</p>
+                        </div>
+                        <div class="flex flex-col items-center border rounded-lg p-4 cursor-pointer"
+                            (click)="selectRole('teacher')" [class.bg-surface-light]="selectedRole() === 'teacher'"
+                            [class.border-primary-dark]="selectedRole() === 'teacher'"
+                            [class.bg-white]="selectedRole() !== 'teacher'"
+                            [class.border-light-gray]="selectedRole() !== 'teacher'">
+                            <svg icon="teacher" class="text-textTertiary size-5.5"></svg>
+                            <p class="text-textPrimary font-semibold text-xs capitalize">teacher</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-6">
+                    <div class="flex justify-between gap-4">
+                        <app-input placeholder="John" label="First Name" />
+                        <app-input placeholder="Doe" label="Last Name" />
+                    </div>
+                    <app-input placeholder="john.doe@example.com" label="Email Address" />
+                    <app-input placeholder="••••••••" label="Password" type="password"/>
+                    <app-input placeholder="••••••••" label="Confirm Password" />
+                    <label for="avatar"
+                        class="flex items-center gap-4 p-4 rounded-xl border-2 border-dashed border-[#BEC8CA4D] bg-surface-container cursor-pointer hover:bg-[#dfe6ff] transition-colors">
+                        <div class="w-14 h-14 shrink-0 flex items-center justify-center rounded-full bg-[#BEC8CA33]">
+                            <svg icon="avatar" class="size-5 text-textSecondary"></svg>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-primary-dark font-normal">Upload Avatar (Optional)</span>
+                            <span class="text-xs text-textTertiary font-normal">JPG, PNG or WEBP. Max 500KB.</span>
+                        </div>
+
+                        <input id="avatar" type="file" accept="image/png,image/jpeg,image/webp" class="hidden" />
+                    </label>
+                    <button appButton>
+                        <svg icon="arrowRight" class="size-3"></svg>
+                        Create Account
+                    </button>
+                </div>
+                <div class="pt-8 mt-8 border-t border-[#BEC8CA33]">
+                    <p class="text-textTertiary font-normal text-center">
+                        Already have an account?
+                        <span class="text-primary-dark font-bold cursor-pointer">Log in</span>
+                    </p>
+                </div>
+            </form>
+        </app-form>
+    </div>
+</section>

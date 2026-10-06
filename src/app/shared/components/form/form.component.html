@@ -1,0 +1,13 @@
+<div class="shadow-form p-10 rounded-xl w-full bg-white">
+    <h1 class="text-2xl font-semibold capitalize text-textPrimary">
+        {{ title() }}
+    </h1>
+
+    <p class="mt-1 font-normal text-textTertiary">
+        {{ description() }}
+    </p>
+
+    <div class="mt-6">
+        <ng-content />
+    </div>
+</div>
