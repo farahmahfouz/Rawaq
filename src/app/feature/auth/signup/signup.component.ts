@@ -9,6 +9,7 @@ import { getControlError } from '../../../core/utils/form.error';
 import { Role, SignupRequest } from '../auth';
 import { AuthService } from '../auth.service';
 import { UploadFileService } from '../../../core/services/upload-file.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -20,12 +21,14 @@ import { UploadFileService } from '../../../core/services/upload-file.service';
 export class SignupComponent {
   private authService = inject(AuthService);
   private uploadFileService = inject(UploadFileService);
+  private router = inject(Router);
 
   selectedRole = signal<Role>('student');
   selectedAvatar = signal<File | null>(null);
   avatarError = signal('');
 
   isLoading = signal(false);
+  errorMessage = signal('');
 
   form = new FormGroup(
     {
@@ -96,6 +99,7 @@ export class SignupComponent {
     }
 
     this.isLoading.set(true);
+    this.errorMessage.set('');
 
     const file = this.selectedAvatar();
 
@@ -136,12 +140,14 @@ export class SignupComponent {
 
     this.authService.signUp(body).subscribe({
       next: (response) => {
-        console.log('SIGNUP SUCCESS:', response);
+        this.router.navigate(['/dashboard']);
         this.isLoading.set(false);
       },
       error: (error) => {
-        console.error('SIGNUP ERROR:', error);
         this.isLoading.set(false);
+        this.errorMessage.set(
+          error?.error?.msg ?? 'Something went wrong, Please try again later!'
+        );
       }
     });
   }
