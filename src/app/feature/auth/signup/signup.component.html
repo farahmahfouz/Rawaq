@@ -1,7 +1,7 @@
 <!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
 <!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 <section class="grid grid-cols-1 lg:grid-cols-2 min-h-dvh">
-    <div class="bg-primary-dark text-white flex flex-col items-center justify-center gap-6">
+    <div class="bg-primary-dark text-white hidden lg:flex flex-col items-center justify-center gap-6">
         <h1 class="text-5xl font-bold tracking-display capitalize">rawaq</h1>
         <p class="body-large max-w-109 opacity-90 text-center">Welcome to Rawaq — your structured learning
             space. Join a community of dedicated mentors and
@@ -22,9 +22,9 @@
             </span>
         </div>
     </div>
-    <div class="flex items-center justify-center py-10">
+    <div class="mx-auto py-10 px-16 w-full">
         <app-form title="create account" description="Fill in the details below to get started.">
-            <form class="w-full max-w-125">
+            <form class="w-full " [formGroup]="form" (ngSubmit)="submit()">
                 <div class="pb-10">
                     <p class="text-textTertiary font-normal leading-6 pb-3">I am a...</p>
                     <div class="grid grid-cols-2 gap-4">
@@ -47,13 +47,13 @@
                     </div>
                 </div>
                 <div class="flex flex-col gap-6">
-                    <div class="flex justify-between gap-4">
-                        <app-input placeholder="John" label="First Name" />
-                        <app-input placeholder="Doe" label="Last Name" />
+                    <div class="grid grid-cols-2 gap-4">
+                        <app-input placeholder="John" label="First Name" formControlName="first_name" [errorMessage]="getError('first_name')"/>
+                        <app-input placeholder="Doe" label="Last Name" formControlName="last_name"[errorMessage]="getError('last_name')"/>
                     </div>
-                    <app-input placeholder="john.doe@example.com" label="Email Address" />
-                    <app-input placeholder="••••••••" label="Password" type="password"/>
-                    <app-input placeholder="••••••••" label="Confirm Password" />
+                    <app-input placeholder="john.doe@example.com" label="Email Address" formControlName="email" [errorMessage]="getError('email')"/>
+                    <app-input placeholder="••••••••" label="Password" type="password" formControlName="password" [errorMessage]="getError('password')"/>
+                    <app-input placeholder="••••••••" label="Confirm Password" formControlName="confirm_password" [errorMessage]="getError('confirm_password')"/>
                     <label for="avatar"
                         class="flex items-center gap-4 p-4 rounded-xl border-2 border-dashed border-[#BEC8CA4D] bg-surface-container cursor-pointer hover:bg-[#dfe6ff] transition-colors">
                         <div class="w-14 h-14 shrink-0 flex items-center justify-center rounded-full bg-[#BEC8CA33]">
@@ -64,7 +64,7 @@
                             <span class="text-xs text-textTertiary font-normal">JPG, PNG or WEBP. Max 500KB.</span>
                         </div>
 
-                        <input id="avatar" type="file" accept="image/png,image/jpeg,image/webp" class="hidden" />
+                        <input id="avatar" type="file" accept="image/png,image/jpeg,image/webp" class="hidden" formControlName="avatar_url"/>
                     </label>
                     <button appButton>
                         <svg icon="arrowRight" class="size-3"></svg>

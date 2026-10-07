@@ -1,7 +1,13 @@
 <label class="text-textTertiary font-normal mb-1.5 block">{{ label() }}</label>
 
 <div class="relative">
-    <input [type]="inputType()" [placeholder]="placeholder()"
+    <input 
+    [type]="inputType()" 
+    [placeholder]="placeholder()"
+    [value]="value()"
+    [disabled]="disabled()"
+    (input)="updateValue($event)"
+    (blur)="onTouched()"
         class="w-full bg-surface-container text-light-gray font-normal py-3.5 px-3 focus:outline-0 rounded-lg"
         [class.pe-11]="type() === 'password'" />
 
@@ -16,7 +22,7 @@
     </button>
     }
     @if(errorMessage()){
-    <div class="flex gap-1">
+    <div class="flex gap-1 items-center pt-1">
         <svg icon="required" class="text-error size-3"></svg>
         <small class="text-error">{{errorMessage()}}</small>
     </div>
