@@ -48,12 +48,17 @@
                 </div>
                 <div class="flex flex-col gap-6">
                     <div class="grid grid-cols-2 gap-4">
-                        <app-input placeholder="John" label="First Name" formControlName="first_name" [errorMessage]="getError('first_name')"/>
-                        <app-input placeholder="Doe" label="Last Name" formControlName="last_name"[errorMessage]="getError('last_name')"/>
+                        <app-input placeholder="John" label="First Name" formControlName="first_name"
+                            [errorMessage]="getError('first_name')" />
+                        <app-input placeholder="Doe" label="Last Name" formControlName="last_name"
+                            [errorMessage]="getError('last_name')" />
                     </div>
-                    <app-input placeholder="john.doe@example.com" label="Email Address" formControlName="email" [errorMessage]="getError('email')"/>
-                    <app-input placeholder="••••••••" label="Password" type="password" formControlName="password" [errorMessage]="getError('password')"/>
-                    <app-input placeholder="••••••••" label="Confirm Password" formControlName="confirm_password" [errorMessage]="getError('confirm_password')"/>
+                    <app-input placeholder="john.doe@example.com" label="Email Address" formControlName="email"
+                        [errorMessage]="getError('email')" />
+                    <app-input placeholder="••••••••" label="Password" type="password" formControlName="password"
+                        [errorMessage]="getError('password')" />
+                    <app-input placeholder="••••••••" label="Confirm Password" formControlName="confirm_password"
+                        [errorMessage]="getError('confirm_password')" />
                     <label for="avatar"
                         class="flex items-center gap-4 p-4 rounded-xl border-2 border-dashed border-[#BEC8CA4D] bg-surface-container cursor-pointer hover:bg-[#dfe6ff] transition-colors">
                         <div class="w-14 h-14 shrink-0 flex items-center justify-center rounded-full bg-[#BEC8CA33]">
@@ -64,11 +69,24 @@
                             <span class="text-xs text-textTertiary font-normal">JPG, PNG or WEBP. Max 500KB.</span>
                         </div>
 
-                        <input id="avatar" type="file" accept="image/png,image/jpeg,image/webp" class="hidden" formControlName="avatar_url"/>
+                        <input id="avatar" type="file" (change)="onAvatarSelected($event)"
+                            accept="image/png,image/jpeg,image/webp" class="hidden" />
+                        @if (avatarError()) {
+                        <small class=" text-error">
+                            {{ avatarError() }}
+                        </small>
+                        }
                     </label>
                     <button appButton>
+                        @if (isLoading()) {
+                        Loading ...
+                        } @else {
                         <svg icon="arrowRight" class="size-3"></svg>
+                        }
+
+                        @if (!isLoading()) {
                         Create Account
+                        }
                     </button>
                 </div>
                 <div class="pt-8 mt-8 border-t border-[#BEC8CA33]">

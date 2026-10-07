@@ -8,7 +8,7 @@
     [disabled]="disabled()"
     (input)="updateValue($event)"
     (blur)="onTouched()"
-        class="w-full bg-surface-container text-light-gray font-normal py-3.5 px-3 focus:outline-0 rounded-lg"
+        class="w-full bg-surface-container placeholder:text-light-gray text-textTertiary font-normal py-3.5 px-3 focus:outline-0 rounded-lg"
         [class.pe-11]="type() === 'password'" />
 
     @if (type() === 'password') {
