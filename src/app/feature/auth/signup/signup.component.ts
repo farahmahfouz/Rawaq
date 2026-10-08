@@ -9,12 +9,12 @@ import { getControlError } from '../../../core/utils/form.error';
 import { Role, SignupRequest } from '../auth';
 import { AuthService } from '../auth.service';
 import { UploadFileService } from '../../../core/services/upload-file.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [IconComponent, FormComponent, ButtonComponent, InputComponent, ReactiveFormsModule],
+  imports: [IconComponent, FormComponent, ButtonComponent, InputComponent, ReactiveFormsModule, RouterLink],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })

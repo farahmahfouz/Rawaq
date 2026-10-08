@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { SignupComponent } from './feature/auth/signup/signup.component';
 import { DashboardComponent } from './feature/dashboard/dashboard.component';
 import { authGuard } from './core/guards/auth.guard';
+import { LoginComponent } from './feature/auth/login/login.component';
 
 export const routes: Routes = [
     {
@@ -11,6 +12,11 @@ export const routes: Routes = [
     },
     {
         path: 'signup', redirectTo: '', pathMatch: 'full'
+    },
+    {
+        path: 'login',
+        component: LoginComponent,
+        title: 'Log In'
     },
     {
         path: 'dashboard',

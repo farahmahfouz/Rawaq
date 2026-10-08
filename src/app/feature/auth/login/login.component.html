@@ -1,0 +1,62 @@
+<section class="min-h-dvh lg:flex items-center justify-center bg-surface-light">
+    <div
+        class="grid grid-cols-1 lg:grid-cols-2 lg:border border-[#D8E3FA4D] lg:shadow-soft rounded-xl overflow-hidden max-w-275 min-h-dvh lg:min-h-0 lg:h-193">
+        <div class="bg-primary-dark p-12 hidden lg:flex flex-col justify-between">
+            <div class="flex flex-col gap-6">
+                <h1 class="font-bold text-5xl tracking-display leading-14 text-white">Welcome to Rawaq
+                    — your structured
+                    learning space
+                </h1>
+                <p class="body-large max-w-109 opacity-90 text-[#82D3DE]">Step back into your journey of knowledge.
+                    Access
+                    your curated lessons, connect with mentors, and
+                    track your progress along the golden path of
+                    academic excellence.</p>
+            </div>
+            <div class="bg-[#006D774D] border border-[#006D7733] p-4 rounded-lg flex gap-4 items-center">
+                <img src="/login.jpg" alt="Senior" class="w-11 h-11 rounded-full border-2 border-white/20">
+                <div>
+                    <p class="text-[#82D3DE] font-medium text-sm tracking-[0.14px]">"Knowledge is a garden that must be
+                        tended."</p>
+                    <p class="text-xs font-normal text-[#82D3DECC]">Dr. Amina Khalil, Senior Mentor</p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-surface-light lg:bg-white px-5 lg:p-16 flex flex-col pb-6 lg:pb-16">
+            <div class="pb-10 hidden lg:block">
+                <p class="text-primary-dark font-semibold text-[32px] tracking-[-0.32px]">Welcome back</p>
+                <p class="text-textTertiary font-normal">Log in to continue your education.</p>
+            </div>
+            <div class="flex flex-col justify-center items-center text-center lg:hidden pt-11.5 pb-8">
+                <div class="bg-primary-dark w-16 h-16 rounded-xl rotate-3 flex items-center justify-center">
+                    <svg icon="logo" class="text-white size-8"></svg>
+                </div>
+                <p class="pt-4 font-semibold text-primary-dark tracking-[-0.7px] text-[28px]">Rawaq</p>
+                <p class="text-textTertiary font-normal px-6">Your structured learning space for deep
+                    knowledge and focus.</p>
+            </div>
+            <div class="pb-4 flex flex-col gap-6">
+                <app-input placeholder="name@example.com" label="Email" variant="outlined" fontWeight="medium"
+                    [showIcon]="true" icon="email" />
+                <app-input placeholder="••••••••" label="Password" type="password" variant="outlined"
+                    fontWeight="medium" [showIcon]="true" icon="lockPassword" [forgot]="true" />
+                <div class="flex items-center gap-2 py-2">
+                    <input type="checkbox" name="" id=""
+                        class="w-4 h-4 cursor-pointer appearance-none rounded border border-light-gray checked:bg-surface-highest checked:border-light-gray relative checked:after:content-['✔'] checked:after:absolute checked:after:inset-0 checked:after:flex checked:after:items-center checked:after:justify-center checked:after:text-white checked:after:text-xs">
+                    <span class="text-textTertiary font-medium text-sm tracking-tight">Remember me</span>
+                </div>
+            </div>
+            <div class="mt-auto lg:mt-0 mb-4">
+                <button appButton class="text-2xl lg:text-sm">
+                    Login
+                    <svg icon="arrowRight" class="size-3"></svg>
+
+                </button>
+                <p class="text-textTertiary font-normal text-center pt-8">
+                    New to Rawaq?
+                    <a class="font-bold cursor-pointer" routerLink="/signup">Create Account</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>

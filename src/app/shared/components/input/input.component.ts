@@ -4,11 +4,16 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export type InputVariant = 'primary' | 'outlined';
 
-const BASE = `w-full text-light-gray font-normal py-3.5 px-3 focus:outline-0 rounded-lg`;
+const BASE = `w-full 
+  placeholder:text-light-gray 
+  text-textTertiary 
+  py-3.5
+  focus:outline-0 
+  rounded-lg`;
 
 const VARIANTS: Record<InputVariant, string> = {
   primary: 'bg-surface-container',
-  outlined: 'bg-transparent border border-light-gray',
+  outlined: 'border border-light-gray bg-[#F9F9FF]',
 };
 
 @Component({
@@ -27,11 +32,19 @@ const VARIANTS: Record<InputVariant, string> = {
 })
 export class InputComponent {
   variant = input<InputVariant>('primary');
-  classes = computed(() => `${BASE} ${VARIANTS[this.variant()]}`);
+  classes = computed(() => {
+    const ps = this.showIcon() ? 'ps-11' : 'ps-3';
+    const pe = this.type() === 'password' ? 'pe-11' : 'pe-3';
+    return `${BASE} ${ps} ${pe} ${VARIANTS[this.variant()]} font-${this.fontWeight()}`;
+  });
   placeholder = input<string>();
   label = input<string>();
   errorMessage = input<string>();
+  fontWeight = input<'normal' | 'medium' | 'semibold' | 'bold'>('normal');
   type = input<'text' | 'email' | 'password'>('text');
+  showIcon = input(false);
+  icon = input<string>('');
+  forgot = input(false);
 
   visible = signal(false);
   value = signal('');
@@ -70,5 +83,4 @@ export class InputComponent {
     this.value.set(value);
     this.onChange(value);
   }
-
 }
