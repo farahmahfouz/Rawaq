@@ -43,7 +43,7 @@
                         fontWeight="medium" [showIcon]="true" icon="lockPassword" [forgot]="true"
                         [errorMessage]="getError('password')" formControlName="password"/>
                     <div class="flex items-center gap-2 py-2">
-                        <input type="checkbox" name="" id=""
+                        <input formControlName="rememberMe" type="checkbox" name="" id=""
                             class="w-4 h-4 cursor-pointer appearance-none rounded border border-light-gray checked:bg-surface-highest checked:border-light-gray relative checked:after:content-['✔'] checked:after:absolute checked:after:inset-0 checked:after:flex checked:after:items-center checked:after:justify-center checked:after:text-white checked:after:text-xs">
                         <span class="text-textTertiary font-medium text-sm tracking-tight">Remember me</span>
                     </div>

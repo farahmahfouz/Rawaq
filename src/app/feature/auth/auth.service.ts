@@ -3,7 +3,7 @@ import { Injectable, signal } from '@angular/core';
 import { API, STORAGE_KEYS } from '../../core/utils/constants';
 import { AuthResponse, LoginRequest, SignupRequest } from './auth';
 import { CookieService } from 'ngx-cookie-service';
-import { tap } from 'rxjs';
+import { catchError, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,43 +20,49 @@ export class AuthService {
     return this.http.post<AuthResponse>(`${API.AUTH}/signup`, body).pipe(
       tap((res) => {
         if (res.access_token) {
-          this.saveTokens(res.access_token, res.refresh_token);
+          this.saveTokens(res.access_token, res.refresh_token, false);
           this.isLoggedIn.set(true);
         }
       })
     );
   }
 
-  login(body: LoginRequest) {
+  login(body: LoginRequest, rememberMe: boolean) {
     return this.http.post<AuthResponse>(`${API.AUTH}/token?grant_type=password`, body).pipe(
       tap((res) => {
         if (res.access_token) {
-          this.saveTokens(res.access_token, res.refresh_token);
+          this.saveTokens(res.access_token, res.refresh_token, rememberMe);
           this.isLoggedIn.set(true);
         }
       })
     );
   }
 
-  saveTokens(accessToken: string, refreshToken: string): void {
-    // It's vital to use 'secure' and 'sameSite' properties for modern browser security
+  saveTokens(
+    accessToken: string,
+    refreshToken: string,
+    rememberMe: boolean,
+  ): void {
+    const base = {
+      secure: false,
+      sameSite: 'Lax' as const,
+      path: '/',
+    };
+
     this.cookieService.set(STORAGE_KEYS.ACCESS_TOKEN, accessToken, {
-      expires: 7,          // Cookie expires in 7 days
-      secure: false,        // Requires HTTPS
-      sameSite: 'Lax',     // Mitigates CSRF protection
-      path: '/'
+      ...base,
+      expires: 1 / 24,
     });
 
-    this.cookieService.set(STORAGE_KEYS.REFRESH_TOKEN, refreshToken, {
-      expires: 30,
-      secure: false,
-      sameSite: 'Lax',
-      path: '/',
-    });
+    const longLived = rememberMe ? { ...base, expires: 30 } : base;
+    this.cookieService.set(STORAGE_KEYS.REFRESH_TOKEN, refreshToken, longLived);
+    this.cookieService.set(STORAGE_KEYS.REMEMBER_ME, String(rememberMe), longLived);
   }
 
   refreshToken() {
     const refreshToken = this.getRefreshToken();
+    const rememberMe =
+      this.cookieService.get(STORAGE_KEYS.REMEMBER_ME) === 'true';
     return this.http
       .post<AuthResponse>(
         `${API.AUTH}/token?grant_type=refresh_token`,
@@ -70,11 +76,16 @@ export class AuthService {
             this.saveTokens(
               res.access_token,
               res.refresh_token,
+              rememberMe
             );
 
             this.isLoggedIn.set(true);
           }
-        })
+        }),
+        catchError((error) => {
+          this.logout();
+          return throwError(() => error);
+        }),
       );
   }
 
@@ -92,6 +103,7 @@ export class AuthService {
   logout(): void {
     this.cookieService.delete(STORAGE_KEYS.ACCESS_TOKEN, '/');
     this.cookieService.delete(STORAGE_KEYS.REFRESH_TOKEN, '/');
+    this.cookieService.delete(STORAGE_KEYS.REMEMBER_ME, '/');
     this.isLoggedIn.set(false);
   }
 }

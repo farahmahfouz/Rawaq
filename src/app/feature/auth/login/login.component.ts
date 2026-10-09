@@ -26,6 +26,7 @@ export class LoginComponent {
     {
       email: new FormControl('farah@gmail.com', [Validators.required, Validators.email]),
       password: new FormControl('Test12345', [Validators.required]),
+      rememberMe: new FormControl(false),
     },
   );
 
@@ -41,14 +42,15 @@ export class LoginComponent {
 
     this.isLoading.set(true);
 
+    const rememberMe = this.form.value.rememberMe;
+
     const body: LoginRequest = {
       email: this.form.value.email!,
       password: this.form.value.password!,
     };
 
-    this.authService.login(body).subscribe({
+    this.authService.login(body, !!rememberMe).subscribe({
       next: (res) => {
-        console.log('Response:', res);
         this.isLoading.set(false);
         this.router.navigate(['/dashboard'], { replaceUrl: true });
       },
