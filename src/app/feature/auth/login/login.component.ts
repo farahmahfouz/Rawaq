@@ -51,6 +51,7 @@ export class LoginComponent {
 
     this.authService.login(body, !!rememberMe).subscribe({
       next: (res) => {
+        console.log(res)
         this.isLoading.set(false);
         this.router.navigate(['/dashboard'], { replaceUrl: true });
       },
