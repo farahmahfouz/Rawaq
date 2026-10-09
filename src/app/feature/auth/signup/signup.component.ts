@@ -140,8 +140,8 @@ export class SignupComponent {
 
     this.authService.signUp(body).subscribe({
       next: (response) => {
-        this.router.navigate(['/dashboard'], { replaceUrl: true });
         this.isLoading.set(false);
+        this.router.navigate(['/dashboard'], { replaceUrl: true });
       },
       error: (error) => {
         this.isLoading.set(false);

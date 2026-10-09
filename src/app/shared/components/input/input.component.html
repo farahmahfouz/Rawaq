@@ -29,10 +29,10 @@
         }
     </button>
     }
-    @if(errorMessage()){
-    <div class="flex gap-1 items-center pt-1">
-        <svg icon="required" class="text-error size-3"></svg>
-        <small class="text-error">{{errorMessage()}}</small>
-    </div>
-    }
 </div>
+@if(errorMessage()){
+<div class="flex gap-1 items-center pt-1">
+    <svg icon="required" class="text-error size-3"></svg>
+    <small class="text-error">{{errorMessage()}}</small>
+</div>
+}

@@ -3,14 +3,19 @@
 export type Role = 'student' | 'teacher';
 
 export interface SignupRequest {
-    email: string,
-    password: string,
-    data: {
-        account_type: Role,
-        first_name: string,
-        last_name: string,
-        avatar_url?: string
-    }
+  email: string,
+  password: string,
+  data: {
+    account_type: Role,
+    first_name: string,
+    last_name: string,
+    avatar_url?: string
+  }
+}
+
+export interface LoginRequest {
+  email: string,
+  password: string
 }
 
 export interface AuthResponse {

@@ -35,28 +35,37 @@
                 <p class="text-textTertiary font-normal px-6">Your structured learning space for deep
                     knowledge and focus.</p>
             </div>
-            <div class="pb-4 flex flex-col gap-6">
-                <app-input placeholder="name@example.com" label="Email" variant="outlined" fontWeight="medium"
-                    [showIcon]="true" icon="email" />
-                <app-input placeholder="••••••••" label="Password" type="password" variant="outlined"
-                    fontWeight="medium" [showIcon]="true" icon="lockPassword" [forgot]="true" />
-                <div class="flex items-center gap-2 py-2">
-                    <input type="checkbox" name="" id=""
-                        class="w-4 h-4 cursor-pointer appearance-none rounded border border-light-gray checked:bg-surface-highest checked:border-light-gray relative checked:after:content-['✔'] checked:after:absolute checked:after:inset-0 checked:after:flex checked:after:items-center checked:after:justify-center checked:after:text-white checked:after:text-xs">
-                    <span class="text-textTertiary font-medium text-sm tracking-tight">Remember me</span>
+            <form [formGroup]="form" (ngSubmit)="submit()" class="contents" novalidate>
+                <div class="pb-4 flex flex-col gap-6">
+                    <app-input placeholder="name@example.com" label="Email" variant="outlined" fontWeight="medium"
+                        [showIcon]="true" icon="email" [errorMessage]="getError('email')" formControlName="email"/>
+                    <app-input placeholder="••••••••" label="Password" type="password" variant="outlined"
+                        fontWeight="medium" [showIcon]="true" icon="lockPassword" [forgot]="true"
+                        [errorMessage]="getError('password')" formControlName="password"/>
+                    <div class="flex items-center gap-2 py-2">
+                        <input type="checkbox" name="" id=""
+                            class="w-4 h-4 cursor-pointer appearance-none rounded border border-light-gray checked:bg-surface-highest checked:border-light-gray relative checked:after:content-['✔'] checked:after:absolute checked:after:inset-0 checked:after:flex checked:after:items-center checked:after:justify-center checked:after:text-white checked:after:text-xs">
+                        <span class="text-textTertiary font-medium text-sm tracking-tight">Remember me</span>
+                    </div>
                 </div>
-            </div>
-            <div class="mt-auto lg:mt-0 mb-4">
-                <button appButton class="text-2xl lg:text-sm">
-                    Login
-                    <svg icon="arrowRight" class="size-3"></svg>
+                <div class="mt-auto lg:mt-0 mb-4">
+                    <button appButton class="text-2xl lg:text-sm">
+                        @if (isLoading()) {
+                        Loading ...
+                        } @else {
+                        <svg icon="arrowRight" class="size-3"></svg>
+                        }
 
-                </button>
-                <p class="text-textTertiary font-normal text-center pt-8">
-                    New to Rawaq?
-                    <a class="font-bold cursor-pointer" routerLink="/signup">Create Account</a>
-                </p>
-            </div>
+                        @if (!isLoading()) {
+                        Login
+                        }
+                    </button>
+                    <p class="text-textTertiary font-normal text-center pt-8">
+                        New to Rawaq?
+                        <a class="font-bold cursor-pointer" routerLink="/signup">Create Account</a>
+                    </p>
+                </div>
+            </form>
         </div>
     </div>
 </section>
